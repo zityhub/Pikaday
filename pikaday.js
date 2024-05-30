@@ -312,6 +312,8 @@
     {
         var arr = [];
         var ariaSelected = 'false';
+        var ariaLabel = `Día ${opts.day}`
+
         if (opts.isEmpty) {
             if (opts.showDaysInNextAndPreviousMonths) {
                 arr.push('is-outside-current-month');
@@ -348,8 +350,18 @@
         }
         if (opts.dayClasses) {
             arr.push(opts.dayClasses);
+
+            // adding "aria-label"
+            const mapClassesToAriaLabel = {
+                'zh-office': ' oficina',
+                'zh-remote': ' remoto',
+                'zh-not-available': ' no disponible',
+                'zh-booking zh-office': ' con reserva',
+            }
+            ariaLabel += mapClassesToAriaLabel[opts.dayClasses]
         }
-        return '<td data-day="' + opts.day + '" class="' + arr.join(' ') + '" aria-selected="' + ariaSelected + '">' +
+
+        return '<td data-day="' + opts.day + '" class="' + arr.join(' ') + '" aria-selected="' + ariaSelected + '" aria-label="' + ariaLabel + '">' +
                  '<button class="pika-button pika-day" type="button" ' +
                     'data-pika-year="' + opts.year + '" data-pika-month="' + opts.month + '" data-pika-day="' + opts.day + '">' +
                         opts.day +
