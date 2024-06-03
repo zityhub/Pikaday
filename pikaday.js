@@ -348,9 +348,7 @@
         if (opts.isEndRange) {
             arr.push('is-endrange');
         }
-        console.log('------- test CI/CD - start renderDay nueva versión --------')
         if (opts.dayClasses) {
-            console.log('--->  test CI/CD Internal dayClasses')
             arr.push(opts.dayClasses);
 
             // adding "aria-label"
@@ -362,8 +360,6 @@
             }
             ariaLabel += mapClassesToAriaLabel[opts.dayClasses]
         }
-        console.log('-------  test CI/CD - end renderDay nueva versión --------')
-
 
         return '<td data-day="' + opts.day + '" class="' + arr.join(' ') + '" aria-selected="' + ariaSelected + '" aria-label="' + ariaLabel + '">' +
                  '<button class="pika-button pika-day" type="button" ' +
