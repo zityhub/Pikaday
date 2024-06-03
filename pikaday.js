@@ -312,6 +312,8 @@
     {
         var arr = [];
         var ariaSelected = 'false';
+        var ariaLabel = `Día ${opts.day}`
+
         if (opts.isEmpty) {
             if (opts.showDaysInNextAndPreviousMonths) {
                 arr.push('is-outside-current-month');
@@ -346,7 +348,20 @@
         if (opts.isEndRange) {
             arr.push('is-endrange');
         }
-        return '<td data-day="' + opts.day + '" class="' + arr.join(' ') + '" aria-selected="' + ariaSelected + '">' +
+        if (opts.dayClasses) {
+            arr.push(opts.dayClasses);
+
+            // adding "aria-label"
+            const mapClassesToAriaLabel = {
+                'zh-office': ' oficina',
+                'zh-remote': ' remoto',
+                'zh-not-available': ' no disponible',
+                'zh-booking zh-office': ' con reserva',
+            }
+            ariaLabel += mapClassesToAriaLabel[opts.dayClasses]
+        }
+
+        return '<td data-day="' + opts.day + '" class="' + arr.join(' ') + '" aria-selected="' + ariaSelected + '" aria-label="' + ariaLabel + '">' +
                  '<button class="pika-button pika-day" type="button" ' +
                     'data-pika-year="' + opts.year + '" data-pika-month="' + opts.month + '" data-pika-day="' + opts.day + '">' +
                         opts.day +
@@ -735,6 +750,8 @@
             opts.disableWeekends = !!opts.disableWeekends;
 
             opts.disableDayFn = (typeof opts.disableDayFn) === 'function' ? opts.disableDayFn : null;
+
+            opts.dayClassesFn = (typeof opts.dayClassesFn) === 'function' ? opts.dayClassesFn : null;
 
             var nom = parseInt(opts.numberOfMonths, 10) || 1;
             opts.numberOfMonths = nom > 4 ? 4 : nom;
@@ -1183,7 +1200,8 @@
                     isDisabled = (opts.minDate && day < opts.minDate) ||
                                  (opts.maxDate && day > opts.maxDate) ||
                                  (opts.disableWeekends && isWeekend(day)) ||
-                                 (opts.disableDayFn && opts.disableDayFn(day));
+                                 (opts.disableDayFn && opts.disableDayFn(day)),
+                    dayClasses = opts.dayClassesFn ? opts.dayClassesFn(day) : ''
 
                 if (isEmpty) {
                     if (i < before) {
@@ -1210,7 +1228,8 @@
                         isEndRange: isEndRange,
                         isInRange: isInRange,
                         showDaysInNextAndPreviousMonths: opts.showDaysInNextAndPreviousMonths,
-                        enableSelectionDaysInNextAndPreviousMonths: opts.enableSelectionDaysInNextAndPreviousMonths
+                        enableSelectionDaysInNextAndPreviousMonths: opts.enableSelectionDaysInNextAndPreviousMonths,
+                        dayClasses: dayClasses
                     };
 
                 if (opts.pickWholeWeek && isSelected) {
