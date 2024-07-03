@@ -371,8 +371,8 @@
                  '</button>' +
                  '<div class="zh-bookings-dots">' +
                     '<span class="zh-bookings-dots_desk"></span>' +
-                    '<span class="zh-bookings-dots_meeting"></span>' +
                     '<span class="zh-bookings-dots_parking"></span>' +
+                    '<span class="zh-bookings-dots_meeting"></span>' +
                  '</div>' +
                '</td>';
     },
