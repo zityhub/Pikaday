@@ -369,10 +369,10 @@
                     'data-pika-year="' + opts.year + '" data-pika-month="' + opts.month + '" data-pika-day="' + opts.day + '">' +
                         opts.day +
                  '</button>' +
-                 '<div class="bookings-dots">' +
-                    '<span class="bookings-dots_desk"></span>' +
-                    '<span class="bookings-dots_meeting"></span>' +
-                    '<span class="bookings-dots_parking"></span>' +
+                 '<div class="zh-bookings-dots">' +
+                    '<span class="zh-bookings-dots_desk"></span>' +
+                    '<span class="zh-bookings-dots_meeting"></span>' +
+                    '<span class="zh-bookings-dots_parking"></span>' +
                  '</div>' +
                '</td>';
     },
