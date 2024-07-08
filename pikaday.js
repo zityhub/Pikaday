@@ -351,14 +351,17 @@
         if (opts.dayClasses) {
             arr.push(opts.dayClasses);
 
-            // adding "aria-label"
-            const mapClassesToAriaLabel = {
-                'zh-office': ' oficina',
-                'zh-remote': ' remoto',
-                'zh-not-available': ' no disponible',
-                'zh-booking zh-office': ' con reserva',
+            // Add "aria-label"
+            
+            if (opts.dayClasses.includes('zh-booking')) {
+                ariaLabel += ' con reserva'
+            } else if (opts.dayClasses.includes('zh-office')) {
+                ariaLabel += ' oficina'
+            } else if (opts.dayClasses.includes('zh-remote')) {
+                ariaLabel += ' remoto'
+            } else if (opts.dayClasses.includes('zh-not-available')) {
+                ariaLabel += ' no disponible'
             }
-            ariaLabel += mapClassesToAriaLabel[opts.dayClasses]
         }
 
         return '<td data-day="' + opts.day + '" class="' + arr.join(' ') + '" aria-selected="' + ariaSelected + '" aria-label="' + ariaLabel + '">' +
@@ -366,6 +369,11 @@
                     'data-pika-year="' + opts.year + '" data-pika-month="' + opts.month + '" data-pika-day="' + opts.day + '">' +
                         opts.day +
                  '</button>' +
+                 '<div class="zh-bookings-dots">' +
+                    '<span class="zh-bookings-dots_desk"></span>' +
+                    '<span class="zh-bookings-dots_parking"></span>' +
+                    '<span class="zh-bookings-dots_meeting"></span>' +
+                 '</div>' +
                '</td>';
     },
 
