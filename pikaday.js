@@ -353,14 +353,20 @@
 
             // Add "aria-label"
             
-            if (opts.dayClasses.includes('zh-booking')) {
-                ariaLabel += ' con reserva'
-            } else if (opts.dayClasses.includes('zh-office')) {
-                ariaLabel += ' oficina'
-            } else if (opts.dayClasses.includes('zh-remote')) {
-                ariaLabel += ' remoto'
-            } else if (opts.dayClasses.includes('zh-not-available')) {
-                ariaLabel += ' no disponible'
+            const mapClassesToAriaLabel = {
+                'zh-office': ' oficina',
+                'zh-remote': ' remoto',
+                'zh-not-available': ' no disponible',
+                'zh-booking': ' con reserva de',
+                'zh-booking-desk': ' desk',
+                'zh-booking-meeting': ' meeting',
+                'zh-booking-parking': ' parking',
+            };
+            
+            for (const [dayClass, dayClassAriaLabel] of Object.entries(mapClassesToAriaLabel)) {
+                if (opts.dayClasses.includes(dayClass)) {
+                    ariaLabel += dayClassAriaLabel;
+                }
             }
         }
 
