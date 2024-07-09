@@ -29,8 +29,10 @@ Inicialmente al hacer el fork se heredaron los tags del repo original. Estos fue
 
 El proceso utilizado para el versionado es hacerlo manualmente con los siguientes pasos:
 
-1. Generar el nuevo tag con `git tag vX.X.X` ej: (`git tag v0.1.0`)
-2. Pushear: `git push origin vX.X.X`
+1. Actualizar `package.json` con la nueva `"version"` y hacer commit y push
+2. Generar el nuevo tag con `git tag vX.X.X` ej: (`git tag v0.1.0`)
+3. Pushear tag con `git push origin vX.X.X`
+4. Actualizar `package.json` en el proyecto donde se quiere consumir este proyecto con: `"pikaday": "zityhub/Pikaday#vX.X.X"` y hacer un `yarn`
 
 *** OJO es importante tener en cuenta que si en algún momento se hiciese una sincronización con la rama master del repo original habría que evitar que se sincronizasen los tags porque sino habría colisión con los del proyecto actual. Para ello habría que utilizar:
 ```
